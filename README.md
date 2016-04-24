@@ -1,6 +1,6 @@
 ### What's in it?
 
-Just a simple [index.jsx](./index.jsx), [webpack.config.js](./webpack.config.js) and [index.html](./public/index.html) file.
+A simple react component for select time in format HH:mm [timeInput.jsx](./src/timeInput.jsx) Its used webpack for building and es6 syntax
 
 ### To run
 
@@ -8,7 +8,7 @@ Just a simple [index.jsx](./index.jsx), [webpack.config.js](./webpack.config.js)
 * Fork and clone the project:
 
 ```
-> $ git clone https://github.com/alicoding/react-webpack-babel.git
+> $ git clone https://github.com/dima-bu/react-time-input.git
 ```
 
 Then install the dependencies:

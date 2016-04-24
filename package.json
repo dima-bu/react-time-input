@@ -19,7 +19,7 @@
   ],
   "author": "Dima Bukhal",
   "license": "MIT",
-  "homepage": "https://github.com/alicoding/react-webpack-babel#readme",
+  "homepage": "https://github.com/dima-bu/react-time-input.git#readme",
   "dependencies": {
     "json-loader": "^0.5.4",
     "json5-loader": "^0.6.0",
