@@ -2,7 +2,46 @@
 
 A simple react component for select time in format HH:mm [timeInput.jsx](./src/timeInput.jsx) Its used webpack for building and es6 syntax
 
-See Demo page [See Demo page](http://dima-bu.github.io/react-time-input-example/index.html)
+[See Demo page](http://dima-bu.github.io/react-time-input-example/index.html)
+
+
+
+
+### Basic Usage
+
+ ```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TimeInput from './src/timeInput.jsx';
+
+
+var TimeWrapper = React.createClass({
+
+	getInitialState: function () {
+		return {time: ''};
+	},
+
+	onTimeChangeHandler: function (timeInput) {
+		this.setState({
+			time: timeInput
+		});
+	},
+
+	render: function() {
+		return (
+			<TimeInput
+				className='form-control'
+				onTimeChange={this.onTimeChangeHandler}
+				time={this.state.time}
+			/>
+		);
+	}
+});
+
+
+ReactDOM.render(<TimeWrapper/>, document.querySelector("#myApp"));
+
+```
 
 
 ### To run
