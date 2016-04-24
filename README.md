@@ -59,18 +59,12 @@ Then install the dependencies:
 > $ npm install
 ```
 
-Install webpack and the development server:
-
-```
-> $ npm i webpack-dev-server webpack -g
-```
-
 You can simply run webpack example build using this command: 
 
 ```
 > $ npm run example
 ```
-Open in the web browser example/index.html
+Open in the web browser file ./example/index.html
 
 
 Please contribute to the project if you think this can be done better in anyway even for this README :)
