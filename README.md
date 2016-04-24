@@ -2,6 +2,9 @@
 
 A simple react component for select time in format HH:mm [timeInput.jsx](./src/timeInput.jsx) Its used webpack for building and es6 syntax
 
+See Demo page [See Demo page](http://dima-bu.github.io/react-time-input-example/index.html)
+
+
 ### To run
 
 * You'll need to have [git](https://git-scm.com/) and [node](https://nodejs.org/en/) installed in your system.
