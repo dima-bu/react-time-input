@@ -1,7 +1,7 @@
 //require("./node_modules/bootstrap/dist/css/bootstrap.min.css")
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TimeInput from './src/timeInput.jsx';
+import TimeInput from './../src/timeInput.jsx';
 
 
 var TimeWrapper = React.createClass({

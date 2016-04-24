@@ -4,10 +4,10 @@ var loaders = require('./webpack.loaders');
 
 module.exports = {
 	entry: [
-		'./index.jsx' // Your appʼs entry point
+		'./example/index.jsx' // Your appʼs entry point
 	],
 	output: {
-		path: path.join(__dirname, 'example'),
+		path: path.join(__dirname, 'example/bundle'),
 		filename: 'bundle.js'
 	},
 	resolve: {
@@ -15,5 +15,8 @@ module.exports = {
 	},
 	module: {
 		loaders: loaders
-	}
+	},
+	plugins: [
+		new webpack.NoErrorsPlugin()
+	]
 };

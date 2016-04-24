@@ -4,13 +4,11 @@ var loaders = require('./webpack.loaders');
 
 module.exports = {
 	entry: [
-		'webpack-dev-server/client?http://0.0.0.0:8080', // WebpackDevServer host and port
-		'webpack/hot/only-dev-server',
-		'./index.jsx' // Your appʼs entry point
+		'./example/index.jsx' // Your appʼs entry point
 	],
 	devtool: process.env.WEBPACK_DEVTOOL || 'source-map',
 	output: {
-		path: path.join(__dirname, 'example'),
+		path: path.join(__dirname, 'example/bundle'),
 		filename: 'bundle.js'
 	},
 	resolve: {
@@ -20,7 +18,7 @@ module.exports = {
 		loaders: loaders
 	},
 	devServer: {
-		contentBase: "./example",
+		contentBase: "./example/bundle",
 			noInfo: true, //  --no-info option
 			hot: false,
 			inline: false
