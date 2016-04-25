@@ -4,15 +4,19 @@ A simple react component for select time in format HH:mm [timeInput.jsx](./src/t
 
 [Demo page] (http://dima-bu.github.io/react-time-input-example/index.html)
 
-
-
 ### Basic Usage
+
+```
+ npm install react-time-input --save-dev
+
+```
+
 
  ```javascript
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TimeInput from './../src/timeInput.jsx';
+import TimeInput from 'react-time-input';
 
 var TimeWrapper = React.createClass({
 
@@ -62,13 +66,13 @@ ReactDOM.render(<App/>, document.querySelector("#myApp"));
 Then install the dependencies:
 
 ```
-> $ npm install
+ npm install
 ```
 
 You can simply run webpack example build using this command: 
 
 ```
-> $ npm run example
+npm run example
 ```
 Open in the web browser file ./example/index.html
 
@@ -76,7 +80,7 @@ Open in the web browser file ./example/index.html
 
 Create build
 ```
-> $ npm run build
+npm run build
 ```
 
 
