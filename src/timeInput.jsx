@@ -3,7 +3,30 @@ import ReactDOM from 'react-dom';
 
 var TimeInput = React.createClass({
 
-	isVlid: function (val) {
+	getInitialState() {
+		return {
+			time: this.props.initTime || ''
+		}
+	},
+
+	componentDidMount() {
+		if (!this.props.disabled && this.props.mountFocus) {
+			setTimeout(()=> {
+				this.refs.timeInput.focus();
+			}, 0);
+		}
+	},
+
+	componentDidUpdate(){
+
+		if (this.props.mountFocus) {
+			setTimeout(()=> {
+				this.refs.timeInput.focus();
+			}, 0);
+		}
+	},
+
+	isValid (val) {
 
 		switch (val.length) {
 			case 0:
@@ -40,11 +63,11 @@ var TimeInput = React.createClass({
 
 	lastVal: '',
 
-	onChangeHandler: function () {
+	onChangeHandler () {
 
 		var val = this.refs.timeInput.value;
 
-		if (this.isVlid(val)) {
+		if (this.isValid(val)) {
 
 			if (val.length === 2 && this.lastVal.length !== 3) {
 				val = val + ':';
@@ -59,22 +82,28 @@ var TimeInput = React.createClass({
 			}
 
 			this.lastVal = val;
+
+			this.setState({
+				time: val
+			});
+
 			this.props.onTimeChange(val);
 
 		}
 
 	},
 
-	render: function () {
+	render () {
 		return (
 			<input
 				className={this.props.className || 'form-control'}
-				type="text"
-				placeholder="Time"
-				value={this.props.time}
+				type="tel"
+				disabled={this.props.disabled}
+				placeholder=" "
+				value={this.state.time}
 				onChange={this.onChangeHandler}
 				ref="timeInput"
-				/>
+			/>
 		);
 	}
 });

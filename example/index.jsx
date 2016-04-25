@@ -1,4 +1,3 @@
-//require("./node_modules/bootstrap/dist/css/bootstrap.min.css")
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TimeInput from './../src/timeInput.jsx';
@@ -6,23 +5,22 @@ import TimeInput from './../src/timeInput.jsx';
 
 var TimeWrapper = React.createClass({
 
-	getInitialState: function () {
-		return {time: '11:22'};
-	},
 
-	onTimeChangeHandler: function (timeInput) {
-		this.setState({
-			time: timeInput
-		});
+	onTimeChangeHandler: function (val) {
+		if (val.length === 5) {
+			// do something with this value
+		}
 	},
 
 	render: function() {
 		return (
 			<TimeInput
+				initTime='11:12'
+				ref="TimeInputWrapper"
 				className='form-control'
+				mountFocus='true'
 				onTimeChange={this.onTimeChangeHandler}
-				time={this.state.time}
-				/>
+			/>
 		);
 	}
 });
