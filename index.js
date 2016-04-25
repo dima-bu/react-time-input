@@ -82,7 +82,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 			if (!this.props.disabled && this.props.mountFocus) {
 				setTimeout(function () {
-					_this.refs.timeInput.focus();
+					_this._input.focus();
 				}, 0);
 			}
 		},
@@ -91,7 +91,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 			if (this.props.mountFocus) {
 				setTimeout(function () {
-					_this2.refs.timeInput.focus();
+					_this2._input.focus();
 				}, 0);
 			}
 		},
@@ -134,7 +134,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		onChangeHandler: function onChangeHandler() {
 
-			var val = this.refs.timeInput.value;
+			var val = this._input.value;
 
 			if (this.isValid(val)) {
 
@@ -160,6 +160,8 @@ return /******/ (function(modules) { // webpackBootstrap
 			}
 		},
 		render: function render() {
+			var _this3 = this;
+
 			return _react2.default.createElement('input', {
 				className: this.props.className || 'form-control',
 				type: 'tel',
@@ -167,7 +169,9 @@ return /******/ (function(modules) { // webpackBootstrap
 				placeholder: ' ',
 				value: this.state.time,
 				onChange: this.onChangeHandler,
-				ref: 'timeInput'
+				ref: function ref(c) {
+					return _this3._input = c;
+				}
 			});
 		}
 	});

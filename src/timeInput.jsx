@@ -12,7 +12,7 @@ var TimeInput = React.createClass({
 	componentDidMount() {
 		if (!this.props.disabled && this.props.mountFocus) {
 			setTimeout(()=> {
-				this.refs.timeInput.focus();
+				this._input.focus();
 			}, 0);
 		}
 	},
@@ -21,7 +21,7 @@ var TimeInput = React.createClass({
 
 		if (this.props.mountFocus) {
 			setTimeout(()=> {
-				this.refs.timeInput.focus();
+				this._input.focus();
 			}, 0);
 		}
 	},
@@ -65,7 +65,7 @@ var TimeInput = React.createClass({
 
 	onChangeHandler () {
 
-		var val = this.refs.timeInput.value;
+		var val = this._input.value;
 
 		if (this.isValid(val)) {
 
@@ -102,7 +102,7 @@ var TimeInput = React.createClass({
 				placeholder=" "
 				value={this.state.time}
 				onChange={this.onChangeHandler}
-				ref="timeInput"
+				ref={(c) => this._input = c}
 			/>
 		);
 	}
