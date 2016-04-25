@@ -17,7 +17,7 @@ var TimeWrapper = React.createClass({
 			<TimeInput
 				initTime='11:12'
 				ref="TimeInputWrapper"
-				className='form-control'
+				className='s-input -time'
 				mountFocus='true'
 				onTimeChange={this.onTimeChangeHandler}
 			/>
