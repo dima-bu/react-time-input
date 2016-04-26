@@ -51,9 +51,15 @@ var TimeInput = React.createClass({
 				}
 				break;
 			case 5:
-				if (parseInt(val.slice(3, 5), 10) <= 59) {
+				if (
+					parseInt(val.slice(0, 1), 10)<= 2 &&
+					parseInt(val.slice(1, 2), 10)<= 23 &&
+					parseInt(val.slice(3, 4), 10) <= 5 &&
+					parseInt(val.slice(3, 5), 10) <= 59)
+				{
 					return true;
 				}
+				return false;
 				break;
 			default:
 				return false;
@@ -87,7 +93,10 @@ var TimeInput = React.createClass({
 				time: val
 			});
 
-			this.props.onTimeChange(val);
+
+			if (val.length === 5) {
+				this.props.onTimeChange(val);
+			}
 
 		}
 

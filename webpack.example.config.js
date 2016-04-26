@@ -4,7 +4,8 @@ var loaders = require('./webpack.loaders');
 
 module.exports = {
 	entry: [
-		'./example/index.jsx' // Your appʼs entry point
+
+		'babel-polyfill', './example/index.jsx' // Your appʼs entry point
 	],
 	output: {
 		path: path.join(__dirname, 'example/bundle'),

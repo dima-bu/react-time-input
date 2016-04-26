@@ -22,9 +22,9 @@ var TimeWrapper = React.createClass({
 
 
 	onTimeChangeHandler: function (val) {
-		if (val.length === 5) {
-			// do something with this value
-		}
+		
+		// do something with this value
+		
 	},
 
 	render: function() {

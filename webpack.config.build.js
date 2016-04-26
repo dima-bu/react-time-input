@@ -2,7 +2,7 @@ var path = require("path");
 
 
 module.exports = {
-    entry:  './src/timeInput.jsx',
+    entry:  ['babel-polyfill','./src/timeInput.jsx'],
     include: [path.resolve(__dirname, 'src')],
     output: {
         filename:'index.js',
