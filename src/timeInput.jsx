@@ -3,118 +3,116 @@ import ReactDOM from 'react-dom';
 
 var TimeInput = React.createClass({
 
-	getInitialState() {
-		return {
-			time: this.props.initTime || ''
-		}
-	},
+    getInitialState() {
+        return {
+            time: this.props.initTime || ''
+        }
+    },
 
-	componentDidMount() {
-		if (!this.props.disabled && this.props.mountFocus) {
-			setTimeout(()=> {
-				this._input.focus();
-			}, 0);
-		}
-	},
+    componentDidMount() {
+        if (!this.props.disabled && this.props.mountFocus) {
+            setTimeout(()=> {
+                this._input.focus();
+            }, 0);
+        }
+    },
 
-	componentDidUpdate(){
+    componentDidUpdate(){
 
-		if (this.props.mountFocus) {
-			setTimeout(()=> {
-				this._input.focus();
-			}, 0);
-		}
-	},
+        if (this.props.mountFocus) {
+            setTimeout(()=> {
+                this._input.focus();
+            }, 0);
+        }
+    },
 
-	isValid (val) {
+    isValid (val) {
 
-		switch (val.length) {
-			case 0:
-				return true;
-				break;
-			case 1:
-				if (parseInt(val, 10) <= 2) {
-					return true;
-				}
-				break;
-			case 2:
-				if (parseInt(val, 10) <= 23) {
-					return true;
-				}
-				break;
-			case 3:
-				return true;
-				break;
-			case 4:
-				if (parseInt(val.slice(3, 4), 10) <= 5) {
-					return true;
-				}
-				break;
-			case 5:
-				if (
-					parseInt(val.slice(0, 1), 10)<= 2 &&
-					parseInt(val.slice(1, 2), 10)<= 23 &&
-					parseInt(val.slice(3, 4), 10) <= 5 &&
-					parseInt(val.slice(3, 5), 10) <= 59)
-				{
-					return true;
-				}
-				return false;
-				break;
-			default:
-				return false;
-		}
+        var isValid = true,
+            letterArr = val.split(':').join('').split(''),
+            valArr = [];
 
-	},
+        // check each letter
 
-	lastVal: '',
+        if (letterArr[0] && (
+                parseInt(letterArr[0], 10) < 0 || (parseInt(letterArr[0], 10) > 2)
+            )) {
+            isValid = false
+        }
 
-	onChangeHandler () {
+        if (letterArr[2] && ((
+                parseInt(letterArr[2], 10) < 0 || parseInt(letterArr[2], 10) > 5)
+            )) {
+            isValid = false
+        }
 
-		var val = this._input.value;
+        if (valArr.indexOf(':')) {
+            valArr = val.split(':');
+        } else {
+            valArr.push(val);
+        }
 
-		if (this.isValid(val)) {
+        // check mm and HH
+        if (valArr[0] && valArr[0].length && (parseInt(valArr[0], 10) < 0 || parseInt(valArr[0], 10) > 23)) {
+            isValid = false
+        }
 
-			if (val.length === 2 && this.lastVal.length !== 3) {
-				val = val + ':';
-			}
+        if (valArr[1] && valArr[1].length && (parseInt(valArr[1], 10) < 0 || parseInt(valArr[1], 10) > 59)) {
+            isValid = false
+        }
 
-			if (val.length === 2 && this.lastVal.length === 3) {
-				val = val.slice(0, 1);
-			}
-
-			if (val.length > 5) {
-				return false;
-			}
-
-			this.lastVal = val;
-
-			this.setState({
-				time: val
-			});
+        return isValid;
 
 
-			if (val.length === 5) {
-				this.props.onTimeChange(val);
-			}
+    },
 
-		}
+    lastVal: '',
 
-	},
+    onChangeHandler () {
 
-	render () {
-		return (
-			<input
-				className={this.props.className || 'form-control'}
-				type="tel"
-				disabled={this.props.disabled}
-				placeholder=" "
-				value={this.state.time}
-				onChange={this.onChangeHandler}
-				ref={(c) => this._input = c}
-			/>
-		);
-	}
+        var val = this._input.value;
+
+        if (this.isValid(val)) {
+
+            if (val.length === 2 && this.lastVal.length !== 3) {
+                val = val + ':';
+            }
+
+            if (val.length === 2 && this.lastVal.length === 3) {
+                val = val.slice(0, 1);
+            }
+
+            if (val.length > 5) {
+                return false;
+            }
+
+            this.lastVal = val;
+
+            this.setState({
+                time: val
+            });
+
+            if (val.length === 5) {
+                this.props.onTimeChange(val);
+            }
+
+        }
+
+    },
+
+    render () {
+        return (
+            <input
+                className={this.props.className}
+                type="tel"
+                disabled={this.props.disabled}
+                placeholder=" "
+                value={this.state.time}
+                onChange={this.onChangeHandler}
+                ref={(c) => this._input = c}
+                />
+        );
+    }
 });
 
 export default TimeInput;
