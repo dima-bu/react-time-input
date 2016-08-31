@@ -2,10 +2,11 @@
   "name": "react-time-input",
   "version": "0.0.8",
   "description": "A simple react component for select time in format HH:mm",
-  "main": "''",
+  "main": "index.js",
   "scripts": {
     "example": "webpack -p --config  webpack.example.config.js --colors",
-    "build": "webpack --config  webpack.config.build.js "
+    "build": "babel src/timeInput.jsx -o index.js",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -15,13 +16,14 @@
     "react",
     "time",
     "input",
-    "time tnput",
-    "react time input"
+    "time input",
+    "react time input",
+    "react-component"
   ],
   "author": "Dima Bukhal - dimabuhal@gmail.com",
   "license": "MIT",
   "homepage": "https://github.com/dima-bu/react-time-input.git#readme",
-  "dependencies": {
+  "peerDependencies": {
     "react": "15.0.1",
     "react-dom": "15.0.1"
   },
@@ -45,5 +47,8 @@
     "phantomjs-prebuilt": "^2.1.7",
     "react-hot-loader": "^1.3.0",
     "webpack": "1.13.0"
+  },
+  "dependencies": {
+    "babel-cli": "^6.14.0"
   }
 }
