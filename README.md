@@ -83,5 +83,4 @@ Create build
 npm run build
 ```
 
-
 Please contribute to the project if you think this can be done better in anyway even for this README :)

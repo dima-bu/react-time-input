@@ -30,7 +30,12 @@ var TimeInput = React.createClass({
 
         var isValid = true,
             letterArr = val.split(':').join('').split(''),
+            regexp = /^\d{0,2}?\:?\d{0,2}$/,
             valArr = [];
+
+        if (!regexp.test(val)) {
+            isValid = false
+        }
 
         // check each letter
 
@@ -71,6 +76,8 @@ var TimeInput = React.createClass({
     onChangeHandler () {
 
         var val = this._input.value;
+
+        console.log(val + ' '+ this.isValid(val));
 
         if (this.isValid(val)) {
 
