@@ -7,7 +7,7 @@ A simple react component for select time in format HH:mm [timeInput.jsx](./src/t
 ### Basic Usage
 
 ```
- npm install react-time-input --save-dev
+ npm install react-time-input --save
 
 ```
 
