@@ -77,8 +77,6 @@ var TimeInput = React.createClass({
 
         var val = this._input.value;
 
-        console.log(val + ' '+ this.isValid(val));
-
         if (this.isValid(val)) {
 
             if (val.length === 2 && this.lastVal.length !== 3) {
