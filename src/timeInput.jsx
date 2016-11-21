@@ -26,6 +26,12 @@ var TimeInput = React.createClass({
         }
     },
 
+    componentWillReceiveProps (nextProps) {
+        if (nextProps.initTime) {
+            this.onChangeHandler(nextProps.initTime);
+        }
+    },
+
     isValid (val) {
 
         var isValid = true,
@@ -73,10 +79,10 @@ var TimeInput = React.createClass({
 
     lastVal: '',
 
-    onChangeHandler () {
-
-        var val = this._input.value;
-
+    onChangeHandler (val) {
+        if (val == this.state.time) {
+            return;
+        }
         if (this.isValid(val)) {
 
             if (val.length === 2 && this.lastVal.length !== 3) {
@@ -113,7 +119,7 @@ var TimeInput = React.createClass({
                 disabled={this.props.disabled}
                 placeholder=" "
                 value={this.state.time}
-                onChange={this.onChangeHandler}
+                onChange={(e) => this.onChangeHandler(e.target.value)}
                 ref={(c) => this._input = c}
                 />
         );
