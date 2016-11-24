@@ -1,8 +1,7 @@
 var path = require("path");
 
 module.exports = {
-    entry:  ['babel-polyfill', './src/timeInput.jsx'],
-    include: [path.resolve(__dirname, 'src')],
+    entry:  ['./src/timeInput.jsx'],
     output: {
         filename:'index.js',
         libraryTarget: 'umd',
@@ -10,7 +9,7 @@ module.exports = {
         umdNamedDefine: true
     },
     resolve: {
-        extensions: ['', '.js'],
+        extensions: ['', '.js', '.jsx'],
     },
     module: {
         loaders: [
