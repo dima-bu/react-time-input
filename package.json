@@ -1,6 +1,6 @@
 {
   "name": "react-time-input",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "description": "A simple react component for select time in format HH:mm",
   "main": "index.js",
   "scripts": {
