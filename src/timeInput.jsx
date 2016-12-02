@@ -110,11 +110,18 @@ var TimeInput = React.createClass({
 
     },
 
+    getType(){
+        if (this.props.type) {
+            return this.props.type
+        }
+        return 'tel'
+    },
+
     render () {
         return (
             <input
                 className={this.props.className}
-                type="tel"
+                type={this.getType}
                 disabled={this.props.disabled}
                 placeholder=" "
                 value={this.state.time}
