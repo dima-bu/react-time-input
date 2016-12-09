@@ -120,12 +120,15 @@ var TimeInput = React.createClass({
     render () {
         return (
             <input
+                name={(this.props.name)? this.props.name : undefined}
                 className={this.props.className}
                 type={this.getType}
                 disabled={this.props.disabled}
                 placeholder=" "
                 value={this.state.time}
                 onChange={(e) => this.onChangeHandler(e.target.value)}
+                onFocus={(this.props.onFocusHandler)?(e) => this.props.onFocusHandler(e):undefined}
+                onBlur={(this.props.onBlurHandler)? (e) => this.props.onBlurHandler(e):undefined}
                 ref={(c) => this._input = c}
                 />
         );
