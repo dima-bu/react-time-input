@@ -122,7 +122,7 @@ var TimeInput = React.createClass({
             <input
                 name={(this.props.name)? this.props.name : undefined}
                 className={this.props.className}
-                type={this.getType}
+                type={this.getType()}
                 disabled={this.props.disabled}
                 placeholder=" "
                 value={this.state.time}
