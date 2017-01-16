@@ -33,13 +33,12 @@ var TimeInput = React.createClass({
 
     isValid (val) {
 
-        var isValid = true,
-            letterArr = val.split(':').join('').split(''),
+        var letterArr = val.split(':').join('').split(''),
             regexp = /^\d{0,2}?\:?\d{0,2}$/,
             valArr = [];
 
         if (!regexp.test(val)) {
-            isValid = false
+            return false
         }
 
         // check each letter
@@ -47,13 +46,13 @@ var TimeInput = React.createClass({
         if (letterArr[0] && (
                 parseInt(letterArr[0], 10) < 0 || (parseInt(letterArr[0], 10) > 2)
             )) {
-            isValid = false
+            return false
         }
 
         if (letterArr[2] && ((
                 parseInt(letterArr[2], 10) < 0 || parseInt(letterArr[2], 10) > 5)
             )) {
-            isValid = false
+            return false
         }
 
         if (valArr.indexOf(':')) {
@@ -64,14 +63,14 @@ var TimeInput = React.createClass({
 
         // check mm and HH
         if (valArr[0] && valArr[0].length && (parseInt(valArr[0], 10) < 0 || parseInt(valArr[0], 10) > 23)) {
-            isValid = false
+            return false
         }
 
         if (valArr[1] && valArr[1].length && (parseInt(valArr[1], 10) < 0 || parseInt(valArr[1], 10) > 59)) {
-            isValid = false
+            return false
         }
 
-        return isValid;
+        return true;
 
 
     },
