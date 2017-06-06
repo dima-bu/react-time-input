@@ -8,6 +8,12 @@ var TimeInput = React.createClass({
         }
     },
 
+    getDefaultProps() {
+        return {
+            placeholder: ' ',
+        };
+    },
+
     componentDidMount() {
         if (!this.props.disabled && this.props.mountFocus) {
             setTimeout(()=> {
@@ -123,7 +129,7 @@ var TimeInput = React.createClass({
                 className={this.props.className}
                 type={this.getType()}
                 disabled={this.props.disabled}
-                placeholder=" "
+                placeholder={this.props.placeholder}
                 value={this.state.time}
                 onChange={(e) => this.onChangeHandler(e.target.value)}
                 onFocus={(this.props.onFocusHandler)?(e) => this.props.onFocusHandler(e):undefined}
