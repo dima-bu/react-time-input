@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 class TimeInput extends Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       time: this.props.initTime || ''
-    }
+    };
+    this.lastVal = '';
   }
 
   componentDidMount() {
@@ -71,8 +72,6 @@ class TimeInput extends Component {
 
       return true;
   }
-
-  lastVal: '';
 
   onChangeHandler (val) {
       if (val == this.state.time) {
