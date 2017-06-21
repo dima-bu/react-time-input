@@ -36,7 +36,7 @@ var testIsValid = [
     },
     {
         value: '4',
-        valid: false,
+        valid: true,
         text: 'не валидно'
     },
     {
@@ -56,6 +56,31 @@ var testIsValid = [
     },
     {
         value: '0',
+        valid: true,
+        text: 'валидно'
+    },
+        {
+        value: '23:3',
+        valid: true,
+        text: 'валидно'
+    },
+    {
+        value: '23:59',
+        valid: true,
+        text: 'валидно'
+    },
+    {
+        value: '2:59',
+        valid: true,
+        text: 'валидно'
+    },
+    {
+        value: ':21',
+        valid: true,
+        text: 'валидно'
+    },
+    {
+        value: '6:21',
         valid: true,
         text: 'валидно'
     }

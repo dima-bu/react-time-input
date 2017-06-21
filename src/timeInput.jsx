@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-var TimeInput = React.createClass({
+class TimeInput extends Component {
 
-    getInitialState() {
-        return {
+    constructor(props) {
+        super(props);
+        this.state = {
             time: this.props.initTime || ''
-        }
-    },
+        };
+        this.lastVal = '';
+    }
 
     componentDidMount() {
         if (!this.props.disabled && this.props.mountFocus) {
@@ -14,44 +16,43 @@ var TimeInput = React.createClass({
                 this._input.focus();
             }, 0);
         }
-    },
+    }
 
     componentDidUpdate(){
-
         if (this.props.mountFocus) {
             setTimeout(()=> {
                 this._input.focus();
             }, 0);
         }
-    },
+    }
 
     componentWillReceiveProps (nextProps) {
         if (nextProps.initTime) {
             this.onChangeHandler(nextProps.initTime);
         }
-    },
+    }
 
     isValid (val) {
-
         var letterArr = val.split(':').join('').split(''),
             regexp = /^\d{0,2}?\:?\d{0,2}$/,
             valArr = [];
+
+        var [hoursStr, minutesStr] = val.split(':')
 
         if (!regexp.test(val)) {
             return false
         }
 
-        // check each letter
+        const hours = Number(hoursStr)
+        const minutes = Number(minutesStr)
 
-        if (letterArr[0] && (
-                parseInt(letterArr[0], 10) < 0 || (parseInt(letterArr[0], 10) > 2)
-            )) {
+        const isValidHour = (hour) => Number.isInteger(hours) && hours >= 0 && hours < 24
+        const isValidMinutes = (minutes) => (Number.isInteger(minutes) && hours >= 0 && hours < 24) || Number.isNaN(minutes)
+        if (!isValidHour(hours) || !isValidMinutes(minutes)) {
             return false
         }
 
-        if (letterArr[2] && ((
-                parseInt(letterArr[2], 10) < 0 || parseInt(letterArr[2], 10) > 5)
-            )) {
+        if (minutes< 10 && Number(minutesStr[0]) > 5) {
             return false
         }
 
@@ -71,11 +72,7 @@ var TimeInput = React.createClass({
         }
 
         return true;
-
-
-    },
-
-    lastVal: '',
+    }
 
     onChangeHandler (val) {
         if (val == this.state.time) {
@@ -107,31 +104,36 @@ var TimeInput = React.createClass({
 
         }
 
-    },
+    }
 
-    getType(){
+    getType() {
         if (this.props.type) {
             return this.props.type
         }
         return 'tel'
-    },
+    }
 
     render () {
         return (
             <input
-                name={(this.props.name)? this.props.name : undefined}
-                className={this.props.className}
-                type={this.getType()}
-                disabled={this.props.disabled}
-                placeholder=" "
-                value={this.state.time}
-                onChange={(e) => this.onChangeHandler(e.target.value)}
-                onFocus={(this.props.onFocusHandler)?(e) => this.props.onFocusHandler(e):undefined}
-                onBlur={(this.props.onBlurHandler)? (e) => this.props.onBlurHandler(e):undefined}
-                ref={(c) => this._input = c}
-                />
+              name={(this.props.name)? this.props.name : undefined}
+              className={this.props.className}
+              type={this.getType()}
+              disabled={this.props.disabled}
+              placeholder={this.props.placeholder}
+              value={this.state.time}
+              onChange={(e) => this.onChangeHandler(e.target.value)}
+              onFocus={(this.props.onFocusHandler)?(e) => this.props.onFocusHandler(e):undefined}
+              onBlur={(this.props.onBlurHandler)? (e) => this.props.onBlurHandler(e):undefined}
+              ref={(c) => this._input = c}
+            />
         );
     }
-});
+
+}
+
+TimeInput.defaultProps = {
+    placeholder: ' '
+};
 
 export default TimeInput;
