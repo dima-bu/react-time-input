@@ -6,7 +6,8 @@
   "scripts": {
     "example": "webpack-dev-server --content-base ./example/ --config  ./example/webpack.config.js --colors --watch ",
     "build": "babel src/timeInput.jsx -o index.js",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "test": "karma start --auto-watch"
   },
   "repository": {
     "type": "git",
@@ -43,6 +44,7 @@
     "karma-jasmine": "^0.3.8",
     "karma-mocha": "^0.2.2",
     "karma-phantomjs-launcher": "^1.0.0",
+    "karma-webpack": "2.0.3",
     "mocha": "^2.4.5",
     "phantomjs-prebuilt": "^2.1.7",
     "react": "15.0.1",
