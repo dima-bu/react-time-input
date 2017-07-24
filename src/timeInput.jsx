@@ -80,7 +80,7 @@ class TimeInput extends Component {
         }
         if (this.isValid(val)) {
 
-            if (val.length === 2 && this.lastVal.length !== 3) {
+            if (val.length === 2 && this.lastVal.length !== 3 && val.indexOf(':') === -1) {
                 val = val + ':';
             }
 
