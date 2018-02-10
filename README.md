@@ -2,7 +2,7 @@
 
 A simple react component for select time in format HH:mm [timeInput.jsx](./src/timeInput.jsx) Its used webpack for building and es6 syntax
 
-[Demo page](http://dima-bu.github.io/react-time-input-example/index.html)
+[Demo page](//dima-bu.github.io/react-time-input-example/index.html)
 
 ### Basic Usage
 
