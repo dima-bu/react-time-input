@@ -1,3 +1,8 @@
+Contributor: Dima Bukhal - dimabuhal@gmail.com
+Collaborators: Dima Bukhal - dimabuhal@gmail.com, arthurvi (https://github.com/arthurvi, https://www.npmjs.com/~arthurvi)
+
+If you want be contributors or сollaborators - write me on dimabuhal@gmail.com with theme 'react-time-input IMPORTANT'
+
 ### What's in it?
 
 A simple react component for select time in format HH:mm [timeInput.jsx](./src/timeInput.jsx) Its used webpack for building and es6 syntax
@@ -22,9 +27,9 @@ var TimeWrapper = React.createClass({
 
 
 	onTimeChangeHandler: function (val) {
-		
+
 		// do something with this value
-		
+
 	},
 
 	render: function() {
@@ -69,7 +74,7 @@ Then install the dependencies:
  npm install
 ```
 
-You can simply run webpack example build using this command: 
+You can simply run webpack example build using this command:
 
 ```
 npm run example
