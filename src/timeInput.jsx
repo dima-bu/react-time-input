@@ -114,17 +114,29 @@ class TimeInput extends Component {
     }
 
     render () {
+        const onChangeHandler = (e) => this.onChangeHandler(e.target.value);
+        const onBlurHandler = this.props.onBlurHandler ? (e) => this.props.onBlurHandler(e) : undefined;
+        const onFocusHandler = this.props.onFocusHandler ? (e) => this.props.onFocusHandler(e) : undefined;
+
+        if (this.props.input) {
+            return React.cloneElement(this.props.input, {
+                ...this.props,
+                onBlur: onBlurHandler,
+                onChange: onChangeHandler,
+                onFocus: onFocusHandler,
+                ref: (c) => this._input = c,
+                value: this.state.time,
+            });
+        }
+
         return (
             <input
-              name={(this.props.name)? this.props.name : undefined}
-              className={this.props.className}
+              {...this.props}
               type={this.getType()}
-              disabled={this.props.disabled}
-              placeholder={this.props.placeholder}
               value={this.state.time}
-              onChange={(e) => this.onChangeHandler(e.target.value)}
-              onFocus={(this.props.onFocusHandler)?(e) => this.props.onFocusHandler(e):undefined}
-              onBlur={(this.props.onBlurHandler)? (e) => this.props.onBlurHandler(e):undefined}
+              onChange={onChangeHandler}
+              onFocus={onFocusHandler}
+              onBlur={onBlurHandler}
               ref={(c) => this._input = c}
             />
         );
