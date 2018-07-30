@@ -84,6 +84,10 @@ class TimeInput extends Component {
                 val = val + ':';
             }
 
+            if (val.length === 2 && this.lastVal.length !== 3 && val.indexOf(':') === 1) {
+                val = "0" + val;
+            }
+
             if (val.length === 2 && this.lastVal.length === 3) {
                 val = val.slice(0, 1);
             }
