@@ -95,6 +95,13 @@ class TimeInput extends Component {
             if (val.length === 2 && this.lastVal.length === 3) {
                 val = val.slice(0, 1);
             }
+            
+            if (val.length === 4) {
+                const times = val.split(":");
+                if(times.length === 2 && times[1].length === 1) {
+                    val = val.substr(0, 3) + "0" + val.substr(3, 1);
+                }
+            }
 
             if (val.length > 5) {
                 return false;
