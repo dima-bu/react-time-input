@@ -33,8 +33,7 @@ class TimeInput extends Component {
     }
 
     isValid (val) {
-        var letterArr = val.split(':').join('').split(''),
-            regexp = /^\d{0,2}?\:?\d{0,2}$/,
+        var regexp = /^\d{0,2}?\:?\d{0,2}$/,
             valArr = [];
 
         var [hoursStr, minutesStr] = val.split(':')
@@ -46,7 +45,7 @@ class TimeInput extends Component {
         const hours = Number(hoursStr)
         const minutes = Number(minutesStr)
 
-        const isValidHour = (hour) => Number.isInteger(hours) && hours >= 0 && hours < 24
+        const isValidHour = (hour) => Number.isInteger(hour) && hour >= 0 && hour < 24
         const isValidMinutes = (minutes) => (Number.isInteger(minutes) && hours >= 0 && hours < 24) || Number.isNaN(minutes)
         if (!isValidHour(hours) || !isValidMinutes(minutes)) {
             return false
@@ -56,7 +55,7 @@ class TimeInput extends Component {
             return false
         }
 
-        if (valArr.indexOf(':')) {
+        if (valArr.indexOf(':') !== -1) {
             valArr = val.split(':');
         } else {
             valArr.push(val);
