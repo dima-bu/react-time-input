@@ -12,68 +12,65 @@ class TimeInput extends Component {
 
     componentDidMount() {
         if (!this.props.disabled && this.props.mountFocus) {
-            setTimeout(()=> {
+            setTimeout(() => {
                 this._input.focus();
             }, 0);
         }
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         if (this.props.mountFocus) {
-            setTimeout(()=> {
+            setTimeout(() => {
                 this._input.focus();
             }, 0);
         }
     }
 
-    componentWillReceiveProps (nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.initTime) {
             this.onChangeHandler(nextProps.initTime);
         }
     }
 
-    isValid (val) {
-        var regexp = /^\d{0,2}?\:?\d{0,2}$/,
-            valArr = [];
+    isValid(val) {
+        const regexp = /^\d{0,2}?\:?\d{0,2}$/;
 
-        var [hoursStr, minutesStr] = val.split(':')
+        const [hoursStr, minutesStr] = val.split(':');
 
         if (!regexp.test(val)) {
-            return false
+            return false;
         }
 
-        const hours = Number(hoursStr)
-        const minutes = Number(minutesStr)
+        const hours = Number(hoursStr);
+        const minutes = Number(minutesStr);
 
-        const isValidHour = (hour) => Number.isInteger(hour) && hour >= 0 && hour < 24
-        const isValidMinutes = (minutes) => (Number.isInteger(minutes) && hours >= 0 && hours < 24) || Number.isNaN(minutes)
+        const isValidHour = (hour) => Number.isInteger(hour) && hour >= 0 && hour < 24;
+        const isValidMinutes = (minutes) => (Number.isInteger(minutes) && hours >= 0 && hours < 24) || Number.isNaN(minutes);
         if (!isValidHour(hours) || !isValidMinutes(minutes)) {
-            return false
+            return false;
         }
 
-        if (minutes< 10 && Number(minutesStr[0]) > 5) {
-            return false
+        if (minutes < 10 && Number(minutesStr[0]) > 5) {
+            return false;
         }
 
-        if (valArr.indexOf(':') !== -1) {
-            valArr = val.split(':');
-        } else {
-            valArr.push(val);
-        }
+        const valArr = val.indexOf(':') !== -1
+            ? val.split(':')
+            : [val];
 
         // check mm and HH
         if (valArr[0] && valArr[0].length && (parseInt(valArr[0], 10) < 0 || parseInt(valArr[0], 10) > 23)) {
-            return false
+            return false;
         }
 
         if (valArr[1] && valArr[1].length && (parseInt(valArr[1], 10) < 0 || parseInt(valArr[1], 10) > 59)) {
-            return false
+            return false;
         }
 
         return true;
     }
 
-    onChangeHandler (val) {
+    onChangeHandler(val) {
         if (val == this.state.time) {
             return;
         }
@@ -107,24 +104,24 @@ class TimeInput extends Component {
 
     getType() {
         if (this.props.type) {
-            return this.props.type
+            return this.props.type;
         }
         return 'tel'
     }
 
-    render () {
+    render() {
         return (
             <input
-              name={(this.props.name)? this.props.name : undefined}
-              className={this.props.className}
-              type={this.getType()}
-              disabled={this.props.disabled}
-              placeholder={this.props.placeholder}
-              value={this.state.time}
-              onChange={(e) => this.onChangeHandler(e.target.value)}
-              onFocus={(this.props.onFocusHandler)?(e) => this.props.onFocusHandler(e):undefined}
-              onBlur={(this.props.onBlurHandler)? (e) => this.props.onBlurHandler(e):undefined}
-              ref={(c) => this._input = c}
+                name={(this.props.name) ? this.props.name : undefined}
+                className={this.props.className}
+                type={this.getType()}
+                disabled={this.props.disabled}
+                placeholder={this.props.placeholder}
+                value={this.state.time}
+                onChange={(e) => this.onChangeHandler(e.target.value)}
+                onFocus={(this.props.onFocusHandler) ? (e) => this.props.onFocusHandler(e) : undefined}
+                onBlur={(this.props.onBlurHandler) ? (e) => this.props.onBlurHandler(e) : undefined}
+                ref={(c) => this._input = c}
             />
         );
     }
