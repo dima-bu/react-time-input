@@ -1,5 +1,10 @@
 var testIsValid = [
     {
+        value: '1:',
+        valid: true,
+        text: 'валидно'
+    },
+    {
         value: '12:12',
         valid: true,
         text: 'валидно'
