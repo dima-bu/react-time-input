@@ -72,7 +72,7 @@ class TimeInput extends Component {
     }
 
     onChangeHandler(val) {
-        if (val == this.state.time && !this.isValid(val)) {
+        if (val == this.state.time || !this.isValid(val)) {
             return;
         }
 
