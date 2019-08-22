@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 class TimeInput extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -33,6 +32,10 @@ class TimeInput extends Component {
     }
 
     isValid(val) {
+        if (val.length === 0) {
+            return true;
+        }
+
         const regexp = /^\d{0,2}?\:?\d{0,2}$/;
 
         const [hoursStr, minutesStr] = val.split(':');
@@ -54,9 +57,7 @@ class TimeInput extends Component {
             return false;
         }
 
-        const valArr = val.indexOf(':') !== -1
-            ? val.split(':')
-            : [val];
+        const valArr = val.indexOf(':') !== -1 ? val.split(':') : [val];
 
         // check mm and HH
         if (valArr[0] && valArr[0].length && (parseInt(valArr[0], 10) < 0 || parseInt(valArr[0], 10) > 23)) {
@@ -71,61 +72,56 @@ class TimeInput extends Component {
     }
 
     onChangeHandler(val) {
-        if (val == this.state.time) {
+        if (val == this.state.time && !this.isValid(val)) {
             return;
         }
-        if (this.isValid(val)) {
 
-            if (val.length === 2 && this.lastVal.length !== 3 && val.indexOf(':') === -1) {
-                val = val + ':';
-            }
-
-            if (val.length === 2 && this.lastVal.length === 3) {
-                val = val.slice(0, 1);
-            }
-
-            if (val.length > 5) {
-                return false;
-            }
-
-            this.lastVal = val;
-
-            this.setState({
-                time: val
-            });
-
-            if (val.length === 5) {
-                this.props.onTimeChange(val);
-            }
-
+        if (val.length === 2 && this.lastVal.length !== 3 && val.indexOf(':') === -1) {
+            val = val + ':';
         }
 
+        if (val.length === 2 && this.lastVal.length === 3) {
+            val = val.slice(0, 1);
+        }
+
+        if (val.length > 5) {
+            return false;
+        }
+
+        this.lastVal = val;
+
+        this.setState({
+            time: val
+        });
+
+        if (val.length === 5 || val.length === 0) {
+            this.props.onTimeChange(val);
+        }
     }
 
     getType() {
         if (this.props.type) {
             return this.props.type;
         }
-        return 'tel'
+        return 'tel';
     }
 
     render() {
         return (
             <input
-                name={(this.props.name) ? this.props.name : undefined}
+                name={this.props.name ? this.props.name : undefined}
                 className={this.props.className}
                 type={this.getType()}
                 disabled={this.props.disabled}
                 placeholder={this.props.placeholder}
                 value={this.state.time}
                 onChange={(e) => this.onChangeHandler(e.target.value)}
-                onFocus={(this.props.onFocusHandler) ? (e) => this.props.onFocusHandler(e) : undefined}
-                onBlur={(this.props.onBlurHandler) ? (e) => this.props.onBlurHandler(e) : undefined}
-                ref={(c) => this._input = c}
+                onFocus={this.props.onFocusHandler ? (e) => this.props.onFocusHandler(e) : undefined}
+                onBlur={this.props.onBlurHandler ? (e) => this.props.onBlurHandler(e) : undefined}
+                ref={(c) => (this._input = c)}
             />
         );
     }
-
 }
 
 TimeInput.defaultProps = {
