@@ -18,17 +18,14 @@ class TimeInput extends Component {
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prev) {
         if (this.props.mountFocus) {
             setTimeout(() => {
                 this._input.focus();
             }, 0);
         }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.initTime) {
-            this.onChangeHandler(nextProps.initTime);
+        if (this.props.initTime !== prev.initTime) {
+            this.onChangeHandler(this.props.initTime)
         }
     }
 
