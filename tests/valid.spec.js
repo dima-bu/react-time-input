@@ -1,11 +1,10 @@
-import timeInput from '../src/timeInput.jsx';
-import testIsValid from '../src/testValues/isValidValues.js';
+import testIsValid from '../src/testValues/isValidValues.js'
+import {isValid} from '../src/validate'
 
-describe('Проверка функции isValid компонета timeInput', function () {
-
+describe('Check function isValid', function () {
     testIsValid.forEach(function(test) {
-        it(test.value + ' - Должно быть '+ test.text, function() {
-            expect(timeInput.prototype.isValid(test.value)).to.equal(test.valid);
+        it(test.value + ' - Should be '+ test.text, function() {
+            expect(isValid(test.value)).toBe(test.valid);
         })
     });
 

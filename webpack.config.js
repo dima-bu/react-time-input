@@ -1,9 +1,13 @@
-var path = require("path");
+const path = require("path")
+const HTMLWebpackPlugin = require('html-webpack-plugin')
+const { join } = require('path')
+const { HotModuleReplacementPlugin } = require('webpack')
 
 module.exports = {
     entry:  ['./src/timeInput.jsx'],
     output: {
-        filename:'index.js',
+        path: path.resolve(__dirname, "dist"),
+        filename: "index_bundle.js",
         libraryTarget: 'umd',
         library: 'react-time-input',
         umdNamedDefine: true
@@ -11,20 +15,36 @@ module.exports = {
     resolve: {
         extensions: ['', '.js', '.jsx'],
     },
+    devServer: {
+        port: 1000,
+        hot: true,
+        open: true,
+        historyApiFallback: true
+    },
     module: {
-        loaders: [
+        rules: [
             {
-                test: /.jsx?$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/,
-                query: {
-                    presets: ['es2015', 'react']
+                test: /\.jsx?$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        "presets": [
+                            "@babel/preset-env",
+                            "@babel/preset-react"
+                        ]
+                    }
                 }
             }
-        ],
-        noParse: []
+        ]
     },
-    resolveModules: {
-        modulesDirectories: ['node_modules'],
-    }
+    plugins: [
+        new HotModuleReplacementPlugin(),
+        new HTMLWebpackPlugin({
+            favicon: false,
+            showErrors: true,
+            cache: true,
+            template: join(__dirname, 'example/index.html')
+        })
+    ]
 };

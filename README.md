@@ -1,7 +1,7 @@
 Contributor: Dima Bukhal - dimabuhal@gmail.com
 Collaborators: Dima Bukhal - dimabuhal@gmail.com, arthurvi (https://github.com/arthurvi, https://www.npmjs.com/~arthurvi)
 
-If you want be contributors or сollaborators - write me on dimabuhal@gmail.com with theme 'react-time-input IMPORTANT'
+If you want be contributors or collaborators - write me on dimabuhal@gmail.com with the theme 'react-time-input IMPORTANT'
 
 ### What's in it?
 
@@ -16,48 +16,48 @@ A simple react component for select time in format HH:mm [timeInput.jsx](./src/t
 
 ```
 
-
  ```javascript
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TimeInput from 'react-time-input';
+const TimeWrapper = () => {
 
-var TimeWrapper = React.createClass({
+    const onFocusHandler = (event) => {
+        console.log("hello there you entered :  my name is ", event.target.name);
+    }
 
+    const onBlurHandler = (event) => {
+        console.log("you left ");
+    }
 
-	onTimeChangeHandler: function (val) {
+    const onTimeChangeHandler = (val) => {
+        if (val.length === 5) {
+            // do something with this value
+        }
+    }
 
-		// do something with this value
+    return (
+        <TimeInput
+            name="example"
+            initTime='11:12'
+            className='s-input -time'
+            mountFocus='true'
+            onTimeChange={onTimeChangeHandler}
+            onFocusHandler={onFocusHandler}
+            onBlurHandler={onBlurHandler}
+        />
+    );
 
-	},
+}
 
-	render: function() {
-		return (
-			<TimeInput
-				initTime='11:12'
-				ref="TimeInputWrapper"
-				className='form-control'
-				mountFocus='true'
-				onTimeChange={this.onTimeChangeHandler}
-			/>
-		);
-	}
-});
+function App() {
+    return (
+        <TimeWrapper/>
+    );
 
-
-export class App extends React.Component {
-	render() {
-		return (
-				<TimeWrapper/>
-		);
-	}
 }
 
 ReactDOM.render(<App/>, document.querySelector("#myApp"));
 
 ```
-
 
 ### To run
 
@@ -88,4 +88,4 @@ Create build
 npm run build
 ```
 
-Please contribute to the project if you think this can be done better in anyway even for this README :)
+Please contribute to the project if you think this can be done better in any way even for this README :)

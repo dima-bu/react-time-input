@@ -1,44 +1,41 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TimeInput from './../src/timeInput.jsx';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import TimeInput from './../src/timeInput.jsx'
 
+const TimeWrapper = () => {
 
-var TimeWrapper = React.createClass({
-	onFocusHandler:function(event){
-		console.log("hello there you entered :  my name is ",event.target.name);
-	},
-	onBlurHandler:function(event){
-		console.log("you left ");
-	},
-	onTimeChangeHandler: function (val) {
-		if (val.length === 5) {
-			// do something with this value
-		}
-	},
+    const onFocusHandler = (event) => {
+        console.log("hello there you entered :  my name is ", event.target.name);
+    }
 
-	render: function() {
-		return (
-			<TimeInput
-				name="example"
-				initTime='11:12'
-				ref="TimeInputWrapper"
-				className='s-input -time'
-				mountFocus='true'
-				onTimeChange={this.onTimeChangeHandler}
-				onFocusHandler={this.onFocusHandler}
-				onBlurHandler={this.onBlurHandler}
-			/>
-		);
-	}
-});
+    const onBlurHandler = (event) => {
+        console.log("you left ");
+    }
 
+    const onTimeChangeHandler = (val) => {
+        if (val.length === 5) {
+            // do something with this value
+        }
+    }
 
-export class App extends React.Component {
-	render() {
-		return (
-				<TimeWrapper/>
-		);
-	}
+    return (
+        <TimeInput
+            name="example"
+            initTime='11:12'
+            className='s-input -time'
+            mountFocus='true'
+            onTimeChange={onTimeChangeHandler}
+            onFocusHandler={onFocusHandler}
+            onBlurHandler={onBlurHandler}
+        />
+    );
+
 }
 
-ReactDOM.render(<App/>, document.querySelector("#myApp"));
+function App() {
+    return (
+        <TimeWrapper/>
+    );
+}
+
+ReactDOM.render(<App/>, document.querySelector("#myApp"))

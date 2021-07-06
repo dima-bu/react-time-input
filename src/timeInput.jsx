@@ -1,86 +1,32 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef } from 'react'
+import {isValid } from "./validate"
 
-class TimeInput extends Component {
+const TimeInput = ({initTime, disabled, mountFocus, onTimeChange, type, onFocusHandler, placeholder, className, name, onBlurHandler}) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            time: this.props.initTime || ''
-        };
-        this.lastVal = '';
-    }
+    const [time, setTime] = useState(initTime || '');
 
-    componentDidMount() {
-        if (!this.props.disabled && this.props.mountFocus) {
+    const _input = useRef(null)
+
+    useEffect(() => {
+        if (!disabled && mountFocus) {
             setTimeout(() => {
-                this._input.focus();
+                _input.current.focus();
             }, 0);
         }
-    }
+    });
 
-    componentDidUpdate() {
-        if (this.props.mountFocus) {
-            setTimeout(() => {
-                this._input.focus();
-            }, 0);
-        }
-    }
+    let lastVal = '';
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.initTime) {
-            this.onChangeHandler(nextProps.initTime);
-        }
-    }
-
-    isValid(val) {
-        const regexp = /^\d{0,2}?\:?\d{0,2}$/;
-
-        const [hoursStr, minutesStr] = val.split(':');
-
-        if (!regexp.test(val)) {
-            return false;
-        }
-
-        const hours = Number(hoursStr);
-        const minutes = Number(minutesStr);
-
-        const isValidHour = (hour) => Number.isInteger(hour) && hour >= 0 && hour < 24;
-        const isValidMinutes = (minutes) => (Number.isInteger(minutes) && hours >= 0 && hours < 24) || Number.isNaN(minutes);
-        if (!isValidHour(hours) || !isValidMinutes(minutes)) {
-            return false;
-        }
-
-        if (minutes < 10 && Number(minutesStr[0]) > 5) {
-            return false;
-        }
-
-        const valArr = val.indexOf(':') !== -1
-            ? val.split(':')
-            : [val];
-
-        // check mm and HH
-        if (valArr[0] && valArr[0].length && (parseInt(valArr[0], 10) < 0 || parseInt(valArr[0], 10) > 23)) {
-            return false;
-        }
-
-        if (valArr[1] && valArr[1].length && (parseInt(valArr[1], 10) < 0 || parseInt(valArr[1], 10) > 59)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    onChangeHandler(val) {
-        if (val == this.state.time) {
+    const onChangeHandler = (val) => {
+        if (val == time) {
             return;
         }
-        if (this.isValid(val)) {
-
-            if (val.length === 2 && this.lastVal.length !== 3 && val.indexOf(':') === -1) {
+        if (isValid(val)) {
+            if (val.length === 2 && lastVal.length !== 3 && val.indexOf(':') === -1) {
                 val = val + ':';
             }
 
-            if (val.length === 2 && this.lastVal.length === 3) {
+            if (val.length === 2 && lastVal.length === 3) {
                 val = val.slice(0, 1);
             }
 
@@ -88,48 +34,42 @@ class TimeInput extends Component {
                 return false;
             }
 
-            this.lastVal = val;
+            lastVal = val;
 
-            this.setState({
-                time: val
-            });
+            setTime(val);
 
             if (val.length === 5) {
-                this.props.onTimeChange(val);
+                onTimeChange(val);
             }
-
         }
-
     }
 
-    getType() {
-        if (this.props.type) {
-            return this.props.type;
+    const getType = () => {
+        if (type) {
+            return type;
         }
         return 'tel'
     }
 
-    render() {
-        return (
-            <input
-                name={(this.props.name) ? this.props.name : undefined}
-                className={this.props.className}
-                type={this.getType()}
-                disabled={this.props.disabled}
-                placeholder={this.props.placeholder}
-                value={this.state.time}
-                onChange={(e) => this.onChangeHandler(e.target.value)}
-                onFocus={(this.props.onFocusHandler) ? (e) => this.props.onFocusHandler(e) : undefined}
-                onBlur={(this.props.onBlurHandler) ? (e) => this.props.onBlurHandler(e) : undefined}
-                ref={(c) => this._input = c}
-            />
-        );
-    }
+    return (
+        <input
+            name={name ? name : undefined}
+            className={className}
+            type={getType()}
+            disabled={disabled}
+            placeholder={placeholder}
+            value={time}
+            onChange={(e) => onChangeHandler(e.target.value)}
+            onFocus={(onFocusHandler) ? (e) => onFocusHandler(e) : undefined}
+            onBlur={(onBlurHandler) ? (e) => onBlurHandler(e) : undefined}
+            ref={_input}
+        />
+    );
 
 }
 
 TimeInput.defaultProps = {
     placeholder: ' '
-};
+}
 
-export default TimeInput;
+export default TimeInput
