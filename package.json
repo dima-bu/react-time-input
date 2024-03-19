@@ -1,6 +1,6 @@
 {
   "name": "react-time-input",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple react component for select time in format HH:mm",
   "main": "dist/index_bundle.js",
   "scripts": {
