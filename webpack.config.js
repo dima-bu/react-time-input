@@ -1,7 +1,7 @@
 const path = require("path")
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { join } = require('path')
-const { HotModuleReplacementPlugin } = require('webpack')
+const { DefinePlugin } = require('webpack')
 
 module.exports = {
     entry:  ['./src/timeInput.jsx'],
@@ -39,12 +39,14 @@ module.exports = {
         ]
     },
     plugins: [
-        new HotModuleReplacementPlugin(),
         new HTMLWebpackPlugin({
             favicon: false,
             showErrors: true,
             cache: true,
             template: join(__dirname, 'example/index.html')
+        }),
+        new DefinePlugin({
+            NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         })
     ]
 };

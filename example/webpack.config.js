@@ -14,6 +14,7 @@ module.exports = {
 		extensions: ['', '.js', '.jsx']
 	},
 	devServer: {
+		hot: true,
 		historyApiFallback: true,
 		open: true,
 		static: path.join(__dirname),
@@ -33,13 +34,10 @@ module.exports = {
 							"@babel/preset-env",
 							"@babel/preset-react"
 						],
-						plugins: ['@babel/plugin-proposal-object-rest-spread']
+						plugins: ['@babel/plugin-transform-object-rest-spread']
 					}
 				}
 			}
 		]
-	},
-	plugins: [
-		new webpack.HotModuleReplacementPlugin(),
-	],
+	}
 };

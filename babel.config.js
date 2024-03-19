@@ -10,7 +10,7 @@ module.exports = {
                     "safari": "11.1"
                 },
                 "useBuiltIns": "usage",
-                "core-js": "^3.15.2"
+                "corejs": "^3.15.2"
             }
         ],
         "@babel/preset-react"
